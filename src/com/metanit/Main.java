@@ -8,10 +8,12 @@ package com.metanit;
 
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
+
 
 public class Main {
-
-    private static void printDir(File dir, String mask) {
+    private static void printDir(File dir, String startsMask) {
         // Получаем подфайлы и каталоги
         File[] files=dir.listFiles();
         /*
@@ -21,12 +23,12 @@ public class Main {
         for (File file : files) {
             if(file.isFile()){
                 // Если это файл, оцениваем имя файла и выводим абсолютный путь
-                if(file.getName().startsWith(mask)){
+                if(file.getName().startsWith(startsMask)){
                     System.out.println ("Путь " + file.getAbsoluteFile ());
                 }
             }else{
                 // Не файл, а каталог. Продолжайте обход и вызовите метод printDir для формирования рекурсии
-                printDir(file, mask);
+                printDir(file, startsMask);
             }
         }
     }
@@ -35,6 +37,9 @@ public class Main {
         // Создаем объект File
         File dir=new File("C:\\Users\\GoldStump\\Documents\\Test_Task_12");
         // Вызов пользовательского метода печати
-        printDir(dir, "input");
+        Scanner input = new Scanner(System.in);
+        String nameInput = input.nextLine();
+        String[] answer = StrPatternDemo.match("input01.txt", nameInput);
+        printDir(dir,  String.join("",answer));
     }
 }
